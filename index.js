@@ -27,7 +27,6 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   introspection: true,
-  playground: true,
   engine: {    
     reportSchema: true
   },
@@ -46,7 +45,7 @@ const server = new ApolloServer({
   }
 })
 
-server.listen({ PORT = process.env.PORT || 4000 }).then(({ url, subscriptionsUrl }) => {
+server.listen(config.PORT || 4000).then(({ url, subscriptionsUrl }) => {
   console.log(`Server ready at ${url}`)
   console.log(`Subscriptions ready at ${subscriptionsUrl}`)
 })
