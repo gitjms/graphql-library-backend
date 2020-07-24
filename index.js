@@ -17,7 +17,7 @@ mongoose.set('useCreateIndex', true)
 
 app.use(cors())
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
+  res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
 })
 
 const JWT_SECRET = config.SECRET
@@ -60,7 +60,14 @@ server.applyMiddleware({
   app,
 })
 
-app.listen(config.PORT || 4000).then(({ url, subscriptionsUrl }) => {
-  console.log(`Server ready at ${url}`)
-  console.log(`Subscriptions ready at ${subscriptionsUrl}`)
+app.listen({ port: config.PORT || 4000 }, () => {
+  // ).then(({ url, subscriptionsUrl }) => {
+  logger.info(`Server running on port ${config.PORT}`)
+  // console.log(`Server ready at ${url}`)
+  // console.log(`Subscriptions ready at ${subscriptionsUrl}`)
 })
+
+// app.listen({ port: config.PORT || 4000 }).then(({ url, subscriptionsUrl }) => {
+//   console.log(`Server ready at ${url}`)
+//   console.log(`Subscriptions ready at ${subscriptionsUrl}`)
+// })
