@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gitjms/graphql-library.git"
+    "url": "git+https://github.com/gitjms/graphql-library/tree/master/library-backend.git"
   },
   "author": "Jari Sunnari",
   "license": "ISC",
