@@ -1,4 +1,6 @@
 const { ApolloServer } = require('apollo-server')
+const typeDefs = require('./schema/typedefs')
+const resolvers = require('./schema/resolvers')
 
 const jwt = require('jsonwebtoken')
 const config = require('./utils/config')
@@ -20,9 +22,6 @@ mongoose.connect( MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true
   .catch((error) => {
     console.log('error connecting to MongoDB:', error.message)
   })
-
-const typeDefs = require('./graphql/typedefs')
-const resolvers = require('./graphql/resolvers')
 
 const server = new ApolloServer({
   typeDefs,
