@@ -20,6 +20,17 @@ app.use(express.static('public'))
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
 })
+app.use((req, res, next) => {
+  res.header(
+    "Access-Control-Allow-Origin",
+    "http://graphql-library-jms.herokuapp.com"
+  );
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+})
 
 const JWT_SECRET = config.SECRET
 const MONGODB_URI = config.MONGODB_URI
