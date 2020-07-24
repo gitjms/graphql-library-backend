@@ -1,0 +1,1 @@
+{"version":3,"sources":["index.css"],"names":[],"mappings":"AAAA,MACE,mBACF,CAEA,SACE,4CACF,CAEA,oBACE,kBACF","file":"main.7bc10594.chunk.css","sourcesContent":["h2,h3 {\r\n  font-family: fantasy;\r\n}\r\n\r\ntd, label {\r\n  font-family: Verdana, Geneva, Tahoma, sans-serif;\r\n}\r\n\r\n#genre-button:focus {\r\n  background: rgb(186, 222, 245);\r\n}"]}
