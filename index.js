@@ -52,7 +52,7 @@ const server = new ApolloServer({
   engine: {    
     reportSchema: true
   },
-  // playground: true,
+  playground: process.env.NODE_ENV !== 'production',
   context: async ({ req }) => {
     const auth = req ? req.headers.authorization : null
     if (auth && auth.toLowerCase().startsWith('bearer ')) {
@@ -64,10 +64,6 @@ const server = new ApolloServer({
         .findById(decodedToken.id)
       return { currentUser }
     }
-  },
-  onDisconnect: ( websocket, context ) => {
-    console.log(websocket)
-    console.log(context)
   }
 })
 
@@ -76,7 +72,8 @@ server.applyMiddleware({
   app,
 })
 
-app.listen({ port: config.PORT || 4000 }, () => {
+const port = Number(config.PORT || 4000)
+app.listen(port, () => {
   logger.info(`Server running on port ${config.PORT}`)
 })
 
