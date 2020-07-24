@@ -19,7 +19,10 @@ const JWT_SECRET = config.SECRET
 const MONGODB_URI = config.MONGODB_URI
 
 app.use(cors())
-app.use(express.static('public'))
+app.use(express.static('build'))
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'public', 'index.html'))
+})
 app.use((req, res, next) => {
   res.header(
     "Access-Control-Allow-Origin",
@@ -30,9 +33,6 @@ app.use((req, res, next) => {
     "Origin, X-Requested-With, Content-Type, Accept"
   );
   next()
-})
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'public', 'index.html'))
 })
 
 logger.info('connecting to', MONGODB_URI)
