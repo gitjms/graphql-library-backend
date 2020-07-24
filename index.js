@@ -15,11 +15,11 @@ const User = require('./models/user')
 mongoose.set('useFindAndModify', false)
 mongoose.set('useCreateIndex', true)
 
+const JWT_SECRET = config.SECRET
+const MONGODB_URI = config.MONGODB_URI
+
 app.use(cors())
 app.use(express.static('public'))
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
-})
 app.use((req, res, next) => {
   res.header(
     "Access-Control-Allow-Origin",
@@ -29,11 +29,11 @@ app.use((req, res, next) => {
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
   );
-  next();
+  next()
 })
-
-const JWT_SECRET = config.SECRET
-const MONGODB_URI = config.MONGODB_URI
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'public', 'index.html'))
+})
 
 logger.info('connecting to', MONGODB_URI)
 
@@ -67,23 +67,20 @@ const server = new ApolloServer({
   }
 })
 
-// server.applyMiddleware({
-//   path: '/', // you should change this to whatever you want
-//   app,
-// })
+server.applyMiddleware({
+  path: '/', // you should change this to whatever you want
+  app,
+})
 
-// app.listen({ port: config.PORT || 4000 }, () => {
-  // ).then(({ url, subscriptionsUrl }) => {
-  // logger.info(`Server running on port ${config.PORT}`)
-  // console.log(`Server ready at ${url}`)
-  // console.log(`Subscriptions ready at ${subscriptionsUrl}`)
-// })
+app.listen({ port: config.PORT || 4000 }, () => {
+  logger.info(`Server running on port ${config.PORT}`)
+})
 
 // server.listen({ port: config.PORT || 4000 }).then(({ url, subscriptionsUrl }) => {
 //   console.log(`Server ready at ${url}`)
 //   console.log(`Subscriptions ready at ${subscriptionsUrl}`)
 // })
 
-server.listen({ port: config.PORT || 4000 }, () => {
-  logger.info(`Server running on port ${config.PORT}`)
-})
+// server.listen({ port: config.PORT || 4000 }, () => {
+//   logger.info(`Server running on port ${config.PORT}`)
+// })
