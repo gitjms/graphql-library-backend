@@ -21,7 +21,7 @@ const MONGODB_URI = config.MONGODB_URI
 app.use(cors())
 app.use(express.static('build'))
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'public', 'index.html'))
+  res.sendFile(path.resolve(__dirname, 'build', 'index.html'))
 })
 app.use((req, res, next) => {
   res.header(
