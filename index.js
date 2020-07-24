@@ -30,6 +30,7 @@ const server = new ApolloServer({
   engine: {    
     reportSchema: true
   },
+  playground: true,
   context: async ({ req }) => {
     const auth = req ? req.headers.authorization : null
     if (auth && auth.toLowerCase().startsWith('bearer ')) {
