@@ -57,7 +57,7 @@ const server = new ApolloServer({
 })
 
 server.applyMiddleware({
-  path: '/', // you should change this to whatever you want
+  path: '/graphql', // you should change this to whatever you want
   app,
 })
 
