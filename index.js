@@ -67,19 +67,19 @@ const server = new ApolloServer({
   }
 })
 
-server.applyMiddleware({
-  path: '/', // you should change this to whatever you want
-  app,
-})
+// server.applyMiddleware({
+//   path: '/', // you should change this to whatever you want
+//   app,
+// })
 
-app.listen({ port: config.PORT || 4000 }, () => {
+// app.listen({ port: config.PORT || 4000 }, () => {
   // ).then(({ url, subscriptionsUrl }) => {
-  logger.info(`Server running on port ${config.PORT}`)
+  // logger.info(`Server running on port ${config.PORT}`)
   // console.log(`Server ready at ${url}`)
   // console.log(`Subscriptions ready at ${subscriptionsUrl}`)
-})
-
-// app.listen({ port: config.PORT || 4000 }).then(({ url, subscriptionsUrl }) => {
-//   console.log(`Server ready at ${url}`)
-//   console.log(`Subscriptions ready at ${subscriptionsUrl}`)
 // })
+
+server.listen({ port: config.PORT || 4000 }).then(({ url, subscriptionsUrl }) => {
+  console.log(`Server ready at ${url}`)
+  console.log(`Subscriptions ready at ${subscriptionsUrl}`)
+})
