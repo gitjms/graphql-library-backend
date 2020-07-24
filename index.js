@@ -41,7 +41,7 @@ const server = new ApolloServer({
   engine: {    
     reportSchema: true
   },
-  playground: true,
+  // playground: true,
   context: async ({ req }) => {
     const auth = req ? req.headers.authorization : null
     if (auth && auth.toLowerCase().startsWith('bearer ')) {
@@ -57,7 +57,7 @@ const server = new ApolloServer({
 })
 
 server.applyMiddleware({
-  path: '/graphql', // you should change this to whatever you want
+  path: '/', // you should change this to whatever you want
   app,
 })
 
