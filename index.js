@@ -37,7 +37,7 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.resolve(__dirname, 'build', 'index.html'))
   })
 }
-router.route("/").get(function(req, res) {
+router.route("/graphql").get(function(req, res) {
   detail.find({}, function(err, result) {
     if (err) {
       res.send(err);
