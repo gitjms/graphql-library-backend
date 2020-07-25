@@ -18,7 +18,6 @@ mongoose.set('useCreateIndex', true)
 const JWT_SECRET = config.SECRET
 const MONGODB_URI = config.MONGODB_URI
 const PORT = config.PORT || 4000
-const router = express.Router()
 
 logger.info('connecting to', MONGODB_URI)
 mongoose.connect( MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -31,21 +30,12 @@ mongoose.connect( MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true
 
 const app = express()
 if (process.env.NODE_ENV === "production") {
-  app.use("/", router)
-  app.use(cors(),express.static("build"))
+  app.use(cors(),
+  express.static("build"))
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'build', 'index.html'))
   })
 }
-router.route("/graphql").get(function(req, res) {
-  detail.find({}, function(err, result) {
-    if (err) {
-      res.send(err);
-    } else {
-      res.send(result);
-    }
-  });
-})
 app.use((req, res, next) => {
   res.header(
     "Access-Control-Allow-Origin",
