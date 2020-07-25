@@ -1,6 +1,6 @@
 const {
   UserInputError, AuthenticationError, PubSub
-} = require('apollo-server')
+} = require('apollo-server-express')
 
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
