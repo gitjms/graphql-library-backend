@@ -54,7 +54,7 @@ const server = new ApolloServer({
   engine: {    
     reportSchema: true
   },
-  playground: true,//process.env.NODE_ENV !== 'production',
+  playground: false,//process.env.NODE_ENV !== 'production',
   context: async ({ req }) => {
     const auth = req ? req.headers.authorization : null
 
