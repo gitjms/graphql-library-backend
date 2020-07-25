@@ -29,12 +29,13 @@ mongoose.connect( MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true
   })
 
 const app = express()
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'build', 'index.html'))
-})
+if (process.env.NODE_ENV === "production") {
+  app.use(cors(),express.static("build"))
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'build', 'index.html'))
+  })
+}
 app.use((req, res, next) => {
-  cors()
-  express.static('build')
   res.header(
     "Access-Control-Allow-Origin",
     "http://graphql-library-jms.herokuapp.com"
@@ -70,7 +71,7 @@ const server = new ApolloServer({
 })
 
 server.applyMiddleware({
-  path: '/',
+  path: '/graphql',
   app,
 })
 
