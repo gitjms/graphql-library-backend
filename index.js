@@ -1,8 +1,8 @@
-const { ApolloServer } = require('apollo-server-express')
-const express = require('express')
-const cors = require('cors')
-const path = require('path')
-const http = require('http')
+const { ApolloServer } = require('apollo-server')//-express')
+// const express = require('express')
+// const cors = require('cors')
+// const path = require('path')
+// const http = require('http')
 const jwt = require('jsonwebtoken')
 
 const typeDefs = require('./schema/typedefs')
@@ -28,25 +28,25 @@ mongoose.connect( MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true
     console.log('error connecting to MongoDB:', error.message)
   })
 
-const app = express()
-if (process.env.NODE_ENV === "production") {
-  app.use(cors(),
-  express.static("build"))
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'build', 'index.html'))
-  })
-}
-app.use((req, res, next) => {
-  res.header(
-    "Access-Control-Allow-Origin",
-    "https://graphql-library-jms.herokuapp.com"
-  );
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next()
-})
+// const app = express()
+// if (process.env.NODE_ENV === "production") {
+//   app.use(cors(),
+//   express.static("build"))
+//   app.get('*', (req, res) => {
+//     res.sendFile(path.resolve(__dirname, 'build', 'index.html'))
+//   })
+// }
+// app.use((req, res, next) => {
+//   res.header(
+//     "Access-Control-Allow-Origin",
+//     "http://graphql-library-jms.herokuapp.com"
+//   );
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept"
+//   );
+//   next()
+// })
 
 const server = new ApolloServer({
   typeDefs,
@@ -71,16 +71,16 @@ const server = new ApolloServer({
   }
 })
 
-server.applyMiddleware({
-  path: '/',
-  app,
-})
+// server.applyMiddleware({
+//   path: '/',
+//   app,
+// })
 
-const httpServer = http.createServer(app);
-server.installSubscriptionHandlers(httpServer)
+// const httpServer = http.createServer(app);
+// server.installSubscriptionHandlers(httpServer)
 
-httpServer.listen(PORT, () => {
+server.listen(PORT, () => {
   logger.info(`Server running on port ${PORT}`)
-  logger.info(`Server ready at http://localhost:${PORT}${server.graphqlPath}`)
-  logger.info(`Subscriptions ready at ws://localhost:${PORT}${server.subscriptionsPath}`)
+  // logger.info(`Server ready at http://localhost:${PORT}${server.graphqlPath}`)
+  // logger.info(`Subscriptions ready at ws://localhost:${PORT}${server.subscriptionsPath}`)
 })
