@@ -29,22 +29,22 @@ mongoose.connect( MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true
   })
 
 const app = express()
-// app.get('*', (req, res) => {
-//   res.sendFile(path.resolve(__dirname, 'build', 'index.html'))
-// })
-// app.use((req, res, next) => {
-//   cors()
-//   express.static('build')
-//   res.header(
-//     "Access-Control-Allow-Origin",
-//     "http://graphql-library-jms.herokuapp.com"
-//   );
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept"
-//   );
-//   next()
-// })
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'build', 'index.html'))
+})
+app.use((req, res, next) => {
+  cors()
+  express.static('build')
+  res.header(
+    "Access-Control-Allow-Origin",
+    "http://graphql-library-jms.herokuapp.com"
+  );
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next()
+})
 
 const server = new ApolloServer({
   typeDefs,
@@ -70,7 +70,7 @@ const server = new ApolloServer({
 })
 
 server.applyMiddleware({
-  // path: '/',
+  path: '/',
   app,
 })
 
