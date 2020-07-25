@@ -1,4 +1,6 @@
 const { ApolloServer } = require('apollo-server-express')
+import { graphqlExpress, graphiqlExpress } from 'apollo-server-express'
+import { makeExecutableSchema } from 'graphql-tools'
 const express = require('express')
 const cors = require('cors')
 const path = require('path')
@@ -31,6 +33,8 @@ mongoose.connect( MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true
 const app = express()
 if (process.env.NODE_ENV === "production") {
   app.use(cors(),
+  app.use('/graphql', bodyParser.json(), graphqlExpress({ schema })),
+  app.use('/', graphiqlExpress({ endpointURL: '/graphql' })),
   express.static("build"))
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'build', 'index.html'))
