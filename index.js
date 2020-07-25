@@ -2,6 +2,7 @@ const { ApolloServer } = require('apollo-server-express')
 const express = require('express')
 const cors = require('cors')
 const path = require('path')
+const http = require('http')
 const jwt = require('jsonwebtoken')
 
 const typeDefs = require('./schema/typedefs')
@@ -74,6 +75,9 @@ server.applyMiddleware({
   path: '/',
   app,
 })
+
+const httpServer = http.createServer(app)
+server.installSubscriptionHandlers(httpServer)
 
 app.listen(PORT, () => {
   logger.info(`Server running on port ${PORT}`)
