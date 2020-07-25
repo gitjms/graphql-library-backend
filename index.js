@@ -50,10 +50,10 @@ mongoose.connect( MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  introspection: false,
-  engine: {    
-    reportSchema: true
-  },
+  introspection: true,
+  // engine: {    
+  //   reportSchema: true
+  // },
   playground: process.env.NODE_ENV !== 'production',
   context: async ({ req }) => {
     const auth = req ? req.headers.authorization : null
