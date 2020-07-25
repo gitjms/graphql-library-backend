@@ -28,7 +28,7 @@ app.get('*', (req, res) => {
 app.use((req, res, next) => {
   res.header(
     "Access-Control-Allow-Origin",
-    "http://localhost:4000"
+    "http://graphql-library-jms.herokuapp.com"
   );
   res.header(
     "Access-Control-Allow-Headers",
