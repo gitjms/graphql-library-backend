@@ -76,11 +76,11 @@ server.applyMiddleware({
   app,
 })
 
-// const httpServer = http.createServer(app);
-// server.installSubscriptionHandlers(httpServer)
+const httpServer = http.createServer(app);
+server.installSubscriptionHandlers(httpServer)
 
 app.listen(PORT, () => {
   logger.info(`Server running on port ${PORT}`)
-  // logger.info(`Server ready at http://localhost:${PORT}${server.graphqlPath}`)
-  // logger.info(`Subscriptions ready at ws://localhost:${PORT}${server.subscriptionsPath}`)
+  logger.info(`Server ready at http://localhost:${PORT}${server.graphqlPath}`)
+  logger.info(`Subscriptions ready at ws://localhost:${PORT}${server.subscriptionsPath}`)
 })
