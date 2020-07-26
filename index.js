@@ -29,13 +29,12 @@ mongoose.connect( MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true
   })
 
 const app = express()
-if (process.env.NODE_ENV === "production") {
-  app.use(cors(),
-  express.static("build"))
-  app.get('/', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'build', 'index.html'))
-  })
-}
+app.use(cors(),
+express.static("build"))
+app.get('/', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'build', 'index.html'))
+})
+
 app.use((req, res, next) => {
   res.header(
     "Access-Control-Allow-Origin",
